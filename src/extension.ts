@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user
 
-      const cssCode: string = convertInlineStyleToCSS({
+      const cssCode: string = convertInlineStyleToCSS(`{
         display: "-webkit-box",
         maxHeight: "44px",
         fontSize: "14px",
@@ -28,7 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
         overflow: "hidden",
         WebkitLineClamp: 2,
         WebkitBoxOrient: "vertical",
-      });
+      }`);
 
       vscode.window.showInformationMessage(`Converted CSS: ${cssCode}`);
     }
@@ -37,9 +37,10 @@ export function activate(context: vscode.ExtensionContext) {
     "jsx-css-converter.getSelectedValues",
     () => {
       const editor = vscode.window.activeTextEditor;
-      vscode.window.showInformationMessage(
-        editor?.document.getText(editor.selection) || ""
-      );
+      const selectedtext = editor?.document.getText(editor.selection);
+      const css = convertInlineStyleToCSS(selectedtext || "");
+
+      vscode.window.showInformationMessage(css);
     }
   );
 
