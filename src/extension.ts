@@ -33,8 +33,18 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.showInformationMessage(`Converted CSS: ${cssCode}`);
     }
   );
+  const disposable2 = vscode.commands.registerCommand(
+    "jsx-css-converter.getSelectedValues",
+    () => {
+      const editor = vscode.window.activeTextEditor;
+      vscode.window.showInformationMessage(
+        editor?.document.getText(editor.selection) || ""
+      );
+    }
+  );
 
   context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable2);
 }
 
 // This method is called when your extension is deactivated

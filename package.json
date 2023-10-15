@@ -16,8 +16,20 @@
       {
         "command": "jsx-css-converter.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "jsx-css-converter.getSelectedValues",
+        "title": "Get Selected Values"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "jsx-css-converter.getSelectedValues",
+          "group": "5_cutcopypaste"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
