@@ -14,10 +14,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "jsx-css-converter.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "jsx-css-converter.getSelectedValues",
         "title": "Convert jsx styles to css"
       }
