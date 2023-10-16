@@ -19,7 +19,7 @@
       },
       {
         "command": "jsx-css-converter.getSelectedValues",
-        "title": "Get Selected Values"
+        "title": "Convert jsx styles to css"
       }
     ],
     "menus": {

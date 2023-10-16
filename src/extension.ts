@@ -37,10 +37,11 @@ export function activate(context: vscode.ExtensionContext) {
     "jsx-css-converter.getSelectedValues",
     () => {
       const editor = vscode.window.activeTextEditor;
-      const selectedtext = editor?.document.getText(editor.selection);
-      const css = convertInlineStyleToCSS(selectedtext || "");
+      const selectedtext = editor?.document.getText(editor.selection) as string;
+      const css = convertInlineStyleToCSS(selectedtext);
 
       vscode.window.showInformationMessage(css);
+      vscode.env.clipboard.writeText(css);
     }
   );
 
