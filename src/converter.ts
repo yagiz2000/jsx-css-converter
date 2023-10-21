@@ -1,15 +1,9 @@
 import * as json5 from "json5";
 
-function convertInlineStyleToCSS(selection: string): string {
-  selection = selection.trim();
-  if (selection.includes("style=")) {
-    selection = selection.split("style=")[1].slice(1, -1);
-  }
-  if (!selection.includes("{")) {
-    selection = selection.replaceAll(`\n`, "").trim();
-    selection = `{${selection}}`;
-  }
-  const styleObject = json5.parse(selection);
+const convertInlineStyleToCSS = (selection: string): string => {
+  const styleString = extractStyleString(selection);
+
+  const styleObject = json5.parse(styleString);
 
   const css = Object.keys(styleObject)
     .map((property) => {
@@ -28,5 +22,18 @@ function convertInlineStyleToCSS(selection: string): string {
     .join("; ");
 
   return css;
-}
+};
+
+const extractStyleString = (selection: string): string => {
+  selection = selection.trim();
+  if (selection.includes("style=")) {
+    const styleMatch = selection.match(/style={\{([^}]*)\}}/) as string[];
+    return `{${styleMatch[1].replaceAll(`\n`, "").trim()}}`;
+  }
+  if (!selection.includes("{")) {
+    selection = selection.replaceAll(`\n`, "").trim();
+    return `{${selection}}`;
+  }
+  return selection;
+};
 export { convertInlineStyleToCSS };
