@@ -6,7 +6,7 @@ function convertInlineStyleToCSS(selection: string): string {
     selection = selection.split("style=")[1].slice(1, -1);
   }
   if (!selection.includes("{")) {
-    selection = selection.replaceAll(`\n`, "");
+    selection = selection.replaceAll(`\n`, "").trim();
     selection = `{${selection}}`;
   }
   const styleObject = json5.parse(selection);
