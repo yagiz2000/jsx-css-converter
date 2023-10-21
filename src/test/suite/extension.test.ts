@@ -38,4 +38,13 @@ suite("Convert with style tag", () => {
       "color: red; display: flex; justify-content: center"
     );
   });
+  test("Convert without curly parentheses", () => {
+    const css = convertInlineStyleToCSS(
+      `color: 'red',display:'flex',justifyContent:'center',fontFamily:'Arial'`
+    );
+    assert.equal(
+      css,
+      "color: red; display: flex; justify-content: center; font-family: 'Arial'"
+    );
+  });
 });
