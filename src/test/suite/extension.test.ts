@@ -47,4 +47,13 @@ suite("Convert with style tag", () => {
       "color: red; display: flex; justify-content: center; font-family: 'Arial'"
     );
   });
+  test("Convert without curly parentheses and ends with comma", () => {
+    const css = convertInlineStyleToCSS(
+      `color: 'red',display:'flex',justifyContent:'center',fontFamily:'Arial',`
+    );
+    assert.equal(
+      css,
+      "color: red; display: flex; justify-content: center; font-family: 'Arial'"
+    );
+  });
 });
