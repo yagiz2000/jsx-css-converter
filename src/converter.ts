@@ -1,18 +1,20 @@
 import * as json5 from "json5";
+import { StyleObject } from "./data/types";
+import { SpecialCaseProperties } from "./data/enums";
 
 const convertInlineStyleToCSS = (selection: string): string => {
   const styleString = extractStyleString(selection);
 
-  const styleObject = json5.parse(styleString);
+  const styleObject = json5.parse<StyleObject>(styleString);
 
   const css = Object.keys(styleObject)
-    .map((property) => {
+    .map((property: string) => {
       const cssProperty = property.replace(
         /[A-Z]/g,
         (match) => `-${match.toLowerCase()}`
       );
       let value;
-      if (property === "fontFamily") {
+      if (property === SpecialCaseProperties.fontFamily) {
         value = `'${styleObject[property]}'`;
       } else {
         value = styleObject[property];
