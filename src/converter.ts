@@ -14,8 +14,12 @@ const convertInlineStyleToCSS = (selection: string): string => {
         (match) => `-${match.toLowerCase()}`
       );
       let value;
-      if (property === SpecialCaseProperties.fontFamily) {
-        value = `'${styleObject[property]}'`;
+      if (
+        Object.values(SpecialCaseProperties).includes(
+          property as SpecialCaseProperties
+        )
+      ) {
+        value = getDerivedValueForSpecialCases(property, styleObject[property]);
       } else {
         value = styleObject[property];
       }
@@ -37,5 +41,19 @@ const extractStyleString = (selection: string): string => {
     return `{${selection}}`;
   }
   return selection;
+};
+
+const getDerivedValueForSpecialCases = (
+  property: string,
+  value: string
+): string | undefined => {
+  if (property === SpecialCaseProperties.fontFamily) {
+    if (value.includes("!important")) {
+      const [fontFamily] = value.split(" ");
+      return `'${fontFamily}' !important`;
+    } else {
+      return `'${value}'`;
+    }
+  }
 };
 export { convertInlineStyleToCSS };

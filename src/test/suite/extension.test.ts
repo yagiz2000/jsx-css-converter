@@ -54,4 +54,15 @@ suite("Multiple Conversion Test Suites ", () => {
       "color: red; display: flex; justify-content: center; font-family: 'Arial'"
     );
   });
+  test("Convert with !important keys", () => {
+    const css = convertInlineStyleToCSS(
+      `<div
+      style={{color: "red",display:"flex",justifyContent:"center !important",fontFamily:'Arial !important',}}
+    ></div>`
+    );
+    assert.equal(
+      css,
+      "color: red; display: flex; justify-content: center !important; font-family: 'Arial' !important"
+    );
+  });
 });
