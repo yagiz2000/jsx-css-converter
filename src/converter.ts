@@ -33,7 +33,7 @@ const convertInlineStyleToCSS = (selection: string): string => {
 
     return css;
   } catch (error) {
-    throw new Error("Invalid style object");
+    throw new Error("Invalid style");
   }
 };
 
