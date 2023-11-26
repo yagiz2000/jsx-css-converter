@@ -24,8 +24,11 @@ jobs:
       - name: Install vsce
         run: npm install -g vsce
 
-      - name: Package extension
+      - name: Build Package extension
         run: vsce package
 
+      - name: Login into VSCode Marketplace
+        run: vsce login ${{ secrets.VSCE_PUBLISHER}} -p ${{ secrets.VSCE_TOKEN }}
+
       - name: Publish to VSCode Marketplace
-        run: vsce publish -p ${{ secrets.VSCE_TOKEN }}
+        run: vsce publish
