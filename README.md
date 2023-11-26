@@ -22,8 +22,8 @@ This Visual Studio Code extension provides a convenient tool to convert inline J
 1. Open a JSX file containing inline styles.
 2. Select the JSX code with inline styles.
 3. Right-click on the selected code.
-4. Choose the "jsx-css-converter" option from the context menu.
-5. The converted CSS code will replace the inline styles.
+4. Choose the "Convert jsx styles to css" option from the context menu.
+5. The converted CSS code will coppied to your clipboard.
 
 ## Example
 
