@@ -27,5 +27,5 @@ jobs:
       - name: Build Package extension
         run: vsce package
 
-      - name: Publish to VSCode Marketplace
+      - name: Publish Extension
         run: vsce publish -p ${{ secrets.VSCE_TOKEN }}
