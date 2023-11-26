@@ -2,7 +2,7 @@
   "name": "jsx-css-converter",
   "displayName": "jsx-css-converter",
   "description": "jsx-css-converter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.82.0"
   },
