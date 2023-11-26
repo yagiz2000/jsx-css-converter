@@ -35,7 +35,7 @@ const MyComponent = () => (
 ```
 
 ```css
-//Coppied to Your Clipboard
+/* Coppied to Your Clipboard*/
 background-color: blue;
 font-size: 16px;
 ```
