@@ -23,7 +23,7 @@ This Visual Studio Code extension provides a convenient tool to convert inline J
 2. Select the JSX code with inline styles.
 3. Right-click on the selected code.
 4. Choose the "Convert jsx styles to css" option from the context menu.
-5. The converted CSS code will coppied to your clipboard.
+5. The converted CSS code will copied to your clipboard.
 
 ## Example
 
@@ -35,7 +35,7 @@ const MyComponent = () => (
 ```
 
 ```css
-/* Coppied to Your Clipboard*/
+/* Copied to Your Clipboard*/
 background-color: blue;
 font-size: 16px;
 ```
