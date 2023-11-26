@@ -1,32 +1,31 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 import { convertInlineStyleToCSS } from "./converter";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-
   const disposable = vscode.commands.registerCommand(
     "jsx-css-converter.getSelectedValues",
     () => {
-      const editor = vscode.window.activeTextEditor;
-      const selectedtext = editor?.document.getText(editor.selection) as string;
-      const css = convertInlineStyleToCSS(selectedtext);
-
-      vscode.window.showInformationMessage(css);
-      vscode.env.clipboard.writeText(css);
+      try {
+        const editor = vscode.window.activeTextEditor;
+        const selectedtext = editor?.document.getText(
+          editor.selection
+        ) as string;
+        const css = convertInlineStyleToCSS(selectedtext);
+        if (css) {
+          vscode.window.showInformationMessage(
+            "Css converted and copied to clipboard"
+          );
+          vscode.env.clipboard.writeText(css);
+        }
+      } catch (error) {
+        vscode.window.showErrorMessage(
+          "Higlighted content is not a valid style object. Please try again."
+        );
+      }
     }
   );
 
   context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}

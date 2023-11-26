@@ -3,31 +3,38 @@ import { StyleObject } from "./data/types";
 import { SpecialCaseProperties } from "./data/enums";
 
 const convertInlineStyleToCSS = (selection: string): string => {
-  const styleString = extractStyleString(selection);
+  try {
+    const styleString = extractStyleString(selection);
 
-  const styleObject = json5.parse<StyleObject>(styleString);
+    const styleObject = json5.parse<StyleObject>(styleString);
 
-  const css = Object.keys(styleObject)
-    .map((property: string) => {
-      const cssProperty = property.replace(
-        /[A-Z]/g,
-        (match) => `-${match.toLowerCase()}`
-      );
-      let value;
-      if (
-        Object.values(SpecialCaseProperties).includes(
-          property as SpecialCaseProperties
-        )
-      ) {
-        value = getDerivedValueForSpecialCases(property, styleObject[property]);
-      } else {
-        value = styleObject[property];
-      }
-      return `${cssProperty}: ${value}`;
-    })
-    .join("; ");
+    const css = Object.keys(styleObject)
+      .map((property: string) => {
+        const cssProperty = property.replace(
+          /[A-Z]/g,
+          (match) => `-${match.toLowerCase()}`
+        );
+        let value;
+        if (
+          Object.values(SpecialCaseProperties).includes(
+            property as SpecialCaseProperties
+          )
+        ) {
+          value = getDerivedValueForSpecialCases(
+            property,
+            styleObject[property]
+          );
+        } else {
+          value = styleObject[property];
+        }
+        return `${cssProperty}: ${value}`;
+      })
+      .join("; ");
 
-  return css;
+    return css;
+  } catch (error) {
+    throw new Error("Invalid style object");
+  }
 };
 
 const extractStyleString = (selection: string): string => {
